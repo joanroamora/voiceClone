@@ -15,8 +15,8 @@ OUTPUT_DIR = './audio'
 MODEL_DIR = './models'
 
 # Modelo y Tokenizer
-tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-large-xlsr-53")
-model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-large-xlsr-53")
+tokenizer = Wav2Vec2Tokenizer.from_pretrained("facebook/wav2vec2-large-xlsr-53-spanish")
+model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-large-xlsr-53-spanish")
 
 # Asegurar que el directorio de salida exista
 os.makedirs(OUTPUT_DIR, exist_ok=True)
