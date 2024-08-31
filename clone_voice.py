@@ -7,6 +7,7 @@ import librosa
 import numpy as np
 import soundfile as sf
 from datetime import datetime
+from espnet.nets.pytorch_backend.e2e_tts_tacotron2 import Tacotron2
 from espnet2.bin.tts_inference import Text2Speech
 
 # Ruta de los directorios
@@ -31,14 +32,14 @@ def load_audio(file_path):
     waveform, sample_rate = torchaudio.load(wav_path)
     return waveform, sample_rate, wav_path
 
-# Módulo 2: Entrenar modelo para la clonación de voz
+# Módulo 2: Cargar modelo preentrenado para la síntesis de voz
 def train_voice_cloning_model():
     print("Cargando modelo preentrenado para la síntesis de voz en español...")
     
-    # Cargar el modelo preentrenado de ESPnet para síntesis de voz
+    # Aquí utilizamos un modelo preentrenado para la síntesis de voz
     text2speech = Text2Speech.from_pretrained(
-        "espnet/kan-bayashi_ljspeech_tacotron2",
-        "espnet/kan-bayashi_ljspeech_hifigan"
+        "kan-bayashi/ljspeech_tacotron2",
+        "kan-bayashi/ljspeech_parallel_wavegan.v3"
     )
     
     print("Modelo cargado y listo para su uso.")
@@ -66,7 +67,7 @@ if __name__ == "__main__":
     # Cargar el audio
     waveform, sample_rate, wav_path = load_audio(input_file)
     
-    # Entrenar el modelo (cargar modelo preentrenado) para la síntesis de voz
+    # Cargar el modelo preentrenado
     text2speech = train_voice_cloning_model()
     
     # Pedir texto a leer
